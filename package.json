@@ -1,8 +1,8 @@
 {
-  "name": "create-config",
-  "version": "1.0.0",
+  "name": "config-file-generator",
+  "version": "1.0.1",
   "bin": {
-    "create-config": "index.js"
+    "config-file-generator": "index.js"
   },
   "description": "Typescript config generator",
   "main": "index.js",
