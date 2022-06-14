@@ -18,4 +18,6 @@ const runCommand = (command, args, opts = undefined) => {
   })
 }
 
-module.exports = runCommand
+module.exports = {
+  runCommand,
+}

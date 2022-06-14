@@ -1,4 +1,0 @@
-{
-  "js": "module.exports = {\n\tenv: {\n\t\tcommonjs: true,\n\t\tes2021: true,\n\t\tnode: true,\n\t},\n\textends: [\n\t\t'airbnb-base',\n\t],\n\tparserOptions: {\n\t\tecmaVersion: 12,\n\t},\n\trules: {\n\t\tsemi: ['error', 'never'],\n\t},\n}\n",
-  "ts": "module.exports = {\n\tenv: {\n\t\tes2021: true,\n\t\tnode: true,\n\t},\n\textends: [\n\t\t'airbnb-base',\n\t\t'plugin:import/typescript',\n\t],\n\tparser: '@typescript-eslint/parser',\n\tparserOptions: {\n\t\tecmaVersion: 12,\n\t\tsourceType: 'module',\n\t},\n\tplugins: [\n\t\t'@typescript-eslint',\n\t],\n\trules: {\n\t\t'import/extensions': [\n\t\t\t'error',\n\t\t\t'ignorePackages',\n\t\t\t{ js: 'never', jsx: 'never', ts: 'never', tsx: 'never' },\n\t\t],\n\t\t'max-len': ['error', { code: 150 }],\n\t\t'no-use-before-define': 0,\n\t\t'no-underscore-dangle': 0,\n\t\tsemi: ['error', 'never'],\n\t\tcamelcase: 0,\n\t\t'no-param-reassign': 0,\n\t},\n}\n"
-}
