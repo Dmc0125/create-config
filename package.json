@@ -1,8 +1,8 @@
 {
   "name": "config-file-generator",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "bin": {
-    "create-dmc-config": "src/index.js"
+    "config-file-generator": "src/index.js"
   },
   "description": "Typescript config generator",
   "main": "index.js",
