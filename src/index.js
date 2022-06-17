@@ -9,12 +9,12 @@ const { initPackageJson } = require('./helpers/initPackageJson')
 const templatesFolderPath = path.join(__dirname, '../templates')
 const args = [
   {
-    short: '--pkg',
+    short: '-pkg',
     long: '--create-pkg',
     description: 'Inits package.json',
   },
   {
-    short: '--tsc',
+    short: '-tsc',
     long: '--ts-config',
     description: 'Installs Typescript, @types/node and generates TS config and typescript'
       + 'ESLint config',

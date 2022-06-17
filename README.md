@@ -5,7 +5,7 @@
 - Can install and configure typescript
 
 ```sh
-npx config-file-generator --tsc --pkg
+npx create-dmc-config --tsc --pkg
 ```
 
 ## Options
