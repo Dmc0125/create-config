@@ -33,7 +33,7 @@ const run = async () => {
     await initPackageJson()
   }
 
-  await createEslintConfig(args.tsConfig, templatesFolderPath)
+  await createEslintConfig(options.tsConfig, templatesFolderPath)
 
   if (options.tsConfig) {
     createTsConfig(templatesFolderPath)

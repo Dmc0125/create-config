@@ -1,6 +1,6 @@
 {
   "name": "config-file-generator",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "bin": {
     "config-file-generator": "src/index.js"
   },
