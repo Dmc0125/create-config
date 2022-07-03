@@ -21,3 +21,8 @@ npx config-file-generator --tsc --pkg
 
 - long: `--create-pkg`
 - Runs `npm init -y`
+- Creates 4 scrips:
+  - build: `tsc`
+  - build:watch: `tsc -w`
+  - start: `node dist/index.js`
+  - dev: `nodemon dist/index.js`
