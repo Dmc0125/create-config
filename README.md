@@ -2,6 +2,16 @@
 
 - Creates basic Nodejs app with typescript, eslint and other stuff
 
+## How to use
+
+### Install globally
+
 ```sh
-npx create-node-tsc-app
+pnpm add -g config-file-generator
+```
+
+### Run
+
+```sh
+config-file-generator
 ```

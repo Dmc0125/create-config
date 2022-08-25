@@ -1,8 +1,8 @@
 {
   "name": "config-file-generator",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "bin": {
-    "config-file-generator": "chmod +x dist/index.mjs && dist/index.mjs"
+    "config-file-generator": "dist/index.mjs"
   },
   "description": "Nodejs app generator with tsc",
   "main": "index.js",
