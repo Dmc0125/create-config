@@ -1,6 +1,6 @@
 {
   "name": "config-file-generator",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "bin": {
     "config-file-generator": "chmod +x dist/index.mjs && dist/index.mjs"
   },

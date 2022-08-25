@@ -121,7 +121,7 @@ await within(async () => {
   if (initGit === 'yes' || initGit === 'y') {
     await fs.writeFile(
       path.join(pwd, `./${projectName}/.gitignore`),
-      'node_modules\n.env',
+      'node_modules\n.env\ndist',
     )
 
     $`git init && git add . && git commit -m 'Initial commit' && git branch -M main`
