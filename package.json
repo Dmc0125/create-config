@@ -1,20 +1,31 @@
 {
   "name": "config-file-generator",
-  "version": "2.1.3",
+  "version": "3.0.0",
   "bin": {
-    "config-file-generator": "src/index.js"
+    "create-node-tsc-app": "chmod +x dist/index.mjs && dist/index.mjs"
   },
-  "description": "Typescript config generator",
+  "description": "Nodejs app generator with tsc",
   "main": "index.js",
+  "type": "module",
   "keywords": [],
   "author": "dmc0125",
   "license": "MIT",
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "build:w": "rm -rf dist && tsc -w",
+    "dev": "chmod +x dist/index.mjs && dist/index.mjs"
+  },
   "dependencies": {
-    "commander": "^8.3.0"
+    "commander": "^8.3.0",
+    "zx": "^7.0.8"
   },
   "devDependencies": {
-    "eslint": "^8.17.0",
+    "@types/node": "^18.7.13",
+    "@typescript-eslint/eslint-plugin": "^5.35.1",
+    "@typescript-eslint/parser": "^5.35.1",
+    "eslint": "^8.22.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0"
+    "eslint-plugin-import": "^2.26.0",
+    "typescript": "^4.7.4"
   }
 }
