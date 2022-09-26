@@ -28,37 +28,59 @@ await fs.mkdir(path.join(pwd, `./${projectName}/src`))
 await fs.writeFile(path.join(pwd, `./${projectName}/src/index.ts`), '')
 
 // COPY tsconfig.json, .eslintrc.js, .prettierrc
-const copyConfigFile = async (fileName: '.eslintrc.js' | 'tsconfig.json' | '.prettierrc') =>
-	fs.copyFile(
-		path.join(__dirname, `../templates/${fileName}`),
-		path.join(pwd, `./${projectName}/${fileName}`),
-	)
+await within(async () => {
+	const copyConfigFile = async (fileName: '.eslintrc.js' | 'tsconfig.json' | '.prettierrc') =>
+		fs.copyFile(
+			path.join(__dirname, `../templates/${fileName}`),
+			path.join(pwd, `./${projectName}/${fileName}`),
+		)
+	
+	await Promise.all([
+		copyConfigFile('.eslintrc.js'),
+		copyConfigFile('tsconfig.json'),
+		copyConfigFile('.prettierrc'),
+	])
+})
 
-await Promise.all([
-	copyConfigFile('.eslintrc.js'),
-	copyConfigFile('tsconfig.json'),
-	copyConfigFile('.prettierrc'),
-])
-
-// CREATE package.json
+// CREATE package.json, tsconfig.json
 await within(async () => {
 	echo(`\n${chalk.blueBright('Creating package.json...')}`)
-
-	const unsetPackageJsonStr = await fs.readFile(path.join(__dirname, '../templates/package.json'), {
-		encoding: 'utf-8',
-	})
 
 	const appDescription = await question('  App description: ')
 	const appAuthor = await question('  App author: ')
 	const appType = await questionWithChoices('  App type: ', ['commonjs', 'module'])
 
-	const packageJsonStr = unsetPackageJsonStr
+	type FileName = 'package.json' | 'tsconfig.json'
+
+	const readConfigFile = (filename: FileName) => (
+		fs.readFile(path.join(__dirname, `../templates/${filename}`), {
+			encoding: 'utf-8',
+		})
+	)
+
+	const [
+		defaultPackageJsonStr,
+		defaultTsconfigJsonStr,
+	] = await Promise.all([
+		readConfigFile('package.json'),
+		readConfigFile('tsconfig.json'),
+	])
+
+	const packageJsonStr = defaultPackageJsonStr
 		.replace('<app-name>', projectName)
 		.replace('<app-description>', appDescription)
 		.replace('<app-author>', appAuthor)
 		.replace('<app-type>', appType)
+	const tsconfigJsonStr = defaultTsconfigJsonStr.replace('<module>', appType)
 
-	await fs.writeFile(path.join(pwd, `./${projectName}/package.json`), packageJsonStr)
+	const write = (fileName: FileName, file: string) => {
+		fs.writeFile(path.join(pwd, `./${projectName}/${fileName}`), file)
+	}
+
+	await Promise.all([
+		write('package.json', packageJsonStr),
+		write('tsconfig.json', tsconfigJsonStr),
+	])
 })
 
 cd(`./${projectName}`)
@@ -78,7 +100,6 @@ await within(async () => {
 })
 
 // INSTALL DEPENDENCIES
-
 const packageManager = await questionWithChoices(chalk.blueBright('Package manager:'), [
 	'pnpm',
 	'npm',
