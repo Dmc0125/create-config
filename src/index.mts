@@ -35,8 +35,8 @@ await fs.mkdir(path.join(pwd, `./${projectName}`))
 await fs.mkdir(path.join(pwd, `./${projectName}/src`))
 await fs.writeFile(path.join(pwd, `./${projectName}/src/index.ts`), '')
 
-// COPY tsconfig.json, .eslintrc.js
-const copyConfigFile = async (fileName: '.eslintrc.js' | 'tsconfig.json') => (
+// COPY tsconfig.json, .eslintrc.js, .prettierrc
+const copyConfigFile = async (fileName: '.eslintrc.js' | 'tsconfig.json' | '.prettierrc') => (
   fs.copyFile(
     path.join(__dirname, `../templates/${fileName}`),
     path.join(pwd, `./${projectName}/${fileName}`),
@@ -46,6 +46,7 @@ const copyConfigFile = async (fileName: '.eslintrc.js' | 'tsconfig.json') => (
 await Promise.all([
   copyConfigFile('.eslintrc.js'),
   copyConfigFile('tsconfig.json'),
+  copyConfigFile('.prettierrc'),
 ])
 
 // CREATE package.json
