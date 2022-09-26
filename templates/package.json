@@ -4,6 +4,7 @@
 	"main": "index.js",
 	"description": "<app-description>",
 	"author": "<app-author>",
+	"type": "<app-type>",
 	"scripts": {
 		"build": "tsc",
 		"build:w": "tsc -w",

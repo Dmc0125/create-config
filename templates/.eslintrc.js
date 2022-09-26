@@ -10,4 +10,8 @@ module.exports = {
 		sourceType: 'module',
 	},
 	plugins: ['@typescript-eslint'],
+	rules: {
+    semi: ['error', 'never'],
+    'comma-dangle': ['error', 'always-multiline'],
+  },
 }

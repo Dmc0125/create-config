@@ -4,7 +4,8 @@ import { $, cd, chalk, echo, question, within } from 'zx'
 import * as fs from 'fs/promises'
 import * as path from 'path'
 
-const errorMessage = (msg: string) => `${chalk.bgRed(' Error: ')}${chalk.red(msg)}`
+import { errorMessage } from './utils/errorMessage.mjs'
+import { questionWithChoices } from './utils/questionWithChoices.mjs'
 
 const projectName = await question('Project name: ')
 
@@ -49,26 +50,18 @@ await within(async () => {
 
 	const appDescription = await question('  App description: ')
 	const appAuthor = await question('  App author: ')
+	const appType = await questionWithChoices('  App type: ', ['commonjs', 'module'])
 
 	const packageJsonStr = unsetPackageJsonStr
 		.replace('<app-name>', projectName)
 		.replace('<app-description>', appDescription)
 		.replace('<app-author>', appAuthor)
+		.replace('<app-type>', appType)
 
 	await fs.writeFile(path.join(pwd, `./${projectName}/package.json`), packageJsonStr)
 })
 
 cd(`./${projectName}`)
-
-const questionWithChoices = async <T extends string[]>(_question: string, choices: T) => {
-	const prompt = `${_question} (${choices.join('/')}) `
-	let answer = await question(prompt)
-	while (!choices.includes(answer)) {
-		echo(errorMessage(`Invalid answer. Valid choices are: ${choices.join(', ')}`))
-		answer = await question(prompt)
-	}
-	return answer as T[number]
-}
 
 // SET license
 await within(async () => {
