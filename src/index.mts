@@ -28,15 +28,14 @@ await fs.mkdir(path.join(pwd, `./${projectName}/src`))
 await fs.writeFile(path.join(pwd, `./${projectName}/src/index.ts`), '')
 
 // COPY .eslintrc.js, .prettierrc
-await within(async () => {
-	const copyConfigFile = async (fileName: '.eslintrc.js' | 'tsconfig.json' | '.prettierrc') =>
+await Promise.all(
+	['.eslintrc.cjs', '.prettierrc'].map((fileName) =>
 		fs.copyFile(
 			path.join(__dirname, `../templates/${fileName}`),
 			path.join(pwd, `./${projectName}/${fileName}`),
-		)
-
-	await Promise.all([copyConfigFile('.eslintrc.js'), copyConfigFile('.prettierrc')])
-})
+		),
+	),
+)
 
 // CREATE package.json, tsconfig.json
 await within(async () => {
