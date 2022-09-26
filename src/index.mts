@@ -27,7 +27,7 @@ await fs.mkdir(path.join(pwd, `./${projectName}`))
 await fs.mkdir(path.join(pwd, `./${projectName}/src`))
 await fs.writeFile(path.join(pwd, `./${projectName}/src/index.ts`), '')
 
-// COPY tsconfig.json, .eslintrc.js, .prettierrc
+// COPY .eslintrc.js, .prettierrc
 await within(async () => {
 	const copyConfigFile = async (fileName: '.eslintrc.js' | 'tsconfig.json' | '.prettierrc') =>
 		fs.copyFile(
@@ -35,11 +35,7 @@ await within(async () => {
 			path.join(pwd, `./${projectName}/${fileName}`),
 		)
 
-	await Promise.all([
-		copyConfigFile('.eslintrc.js'),
-		copyConfigFile('tsconfig.json'),
-		copyConfigFile('.prettierrc'),
-	])
+	await Promise.all([copyConfigFile('.eslintrc.js'), copyConfigFile('.prettierrc')])
 })
 
 // CREATE package.json, tsconfig.json
@@ -67,7 +63,15 @@ await within(async () => {
 		.replace('<app-description>', appDescription)
 		.replace('<app-author>', appAuthor)
 		.replace('<app-type>', appType)
-	const tsconfigJsonStr = defaultTsconfigJsonStr.replace('<module>', appType)
+
+	const tsConfigModules = {
+		commonjs: 'CommonJS',
+		module: 'ESNext',
+	}
+	const tsconfigJsonStr = defaultTsconfigJsonStr.replace(
+		'<module>',
+		tsConfigModules[appType as keyof typeof tsConfigModules],
+	)
 
 	const write = (fileName: FileName, file: string) => {
 		fs.writeFile(path.join(pwd, `./${projectName}/${fileName}`), file)
