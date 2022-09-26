@@ -11,7 +11,7 @@ module.exports = {
 	},
 	plugins: ['@typescript-eslint'],
 	rules: {
-    semi: ['error', 'never'],
-    'comma-dangle': ['error', 'always-multiline'],
-  },
+		semi: ['error', 'never'],
+		'comma-dangle': ['error', 'always-multiline'],
+	},
 }

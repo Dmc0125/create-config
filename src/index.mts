@@ -34,7 +34,7 @@ await within(async () => {
 			path.join(__dirname, `../templates/${fileName}`),
 			path.join(pwd, `./${projectName}/${fileName}`),
 		)
-	
+
 	await Promise.all([
 		copyConfigFile('.eslintrc.js'),
 		copyConfigFile('tsconfig.json'),
@@ -52,16 +52,12 @@ await within(async () => {
 
 	type FileName = 'package.json' | 'tsconfig.json'
 
-	const readConfigFile = (filename: FileName) => (
+	const readConfigFile = (filename: FileName) =>
 		fs.readFile(path.join(__dirname, `../templates/${filename}`), {
 			encoding: 'utf-8',
 		})
-	)
 
-	const [
-		defaultPackageJsonStr,
-		defaultTsconfigJsonStr,
-	] = await Promise.all([
+	const [defaultPackageJsonStr, defaultTsconfigJsonStr] = await Promise.all([
 		readConfigFile('package.json'),
 		readConfigFile('tsconfig.json'),
 	])

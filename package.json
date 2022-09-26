@@ -1,6 +1,6 @@
 {
 	"name": "config-file-generator",
-	"version": "3.2.0",
+	"version": "3.2.1",
 	"bin": {
 		"config-file-generator": "dist/index.mjs"
 	},
